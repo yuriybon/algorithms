@@ -84,12 +84,13 @@ public class Sorts {
 		if (pos == a.length-1)
 			return;
 		if (a[pos] > a[pos+1]) {
-			int val = a[pos+1];
-			while ( a[pos-1] > val && pos != 0 )
-				pos--;
-			a[pos+1] = a[pos+1] + a[pos];
-			a[pos]   = a[pos+1] - a[pos];
-			a[pos+1] = a[pos+1] - a[pos];
+			a[pos+1] = a[pos+1]+a[pos];
+			a[pos] = a[pos+1]-a[pos];
+			a[pos+1] = a[pos+1]-a[pos];
+			if (pos != 0) 
+			    recSort(a,--pos);
+//			else
+//				recSort(a,0);	
 		}
 		recSort(a,++pos);
 	}
@@ -99,7 +100,6 @@ public class Sorts {
 		int[] a1 = new int[arr.length/2];
 		int[] a2 = new int[arr.length-arr.length/2];
 		copyFrom(arr,a1,a2);
-		
 		//2. sort those arrys by recSort
 		recSort(a1,0);
 		//insertSort(a1);
@@ -151,7 +151,7 @@ public class Sorts {
 //		Sorts s = new Sorts();
 //		int[] a1 = s.generate(100);
 		//int[] a2 = Arrays.copyOf(a1, a1.length);
-		int len = 100_000;
+		int len = 1_000_000;
 		int[] a1 = new int[len];
 		for (int i = 0; i < len; i++) {
 			a1[i] = randInt(10,10_000_000);
